@@ -81,8 +81,8 @@ const sendEmail = (to, author, text) => {
     const mailer = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: "adrielly.ufrj@gmail.com",
-            pass: "bcmt18.2"
+            user: process.env.MAIL_USER,
+            pass: process.env.MAIL_PASSWORD
         }
     })
 
