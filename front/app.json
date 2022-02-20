@@ -1,10 +1,16 @@
 {
-  "name": "front",
-  "displayName": "front",
   "expo": {
-    "name": "front",
-    "slug": "front",
-    "version": "1.0.0",
+    "name": "SendMessage",
+    "slug": "SendMessage",
+    "scheme": "send-message",
+    "version": "1.5.5",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#121519"
+    },
     "assetBundlePatterns": [
       "**/*"
     ]
