@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     },
     textView: {
         color: "#FFF",
-        fontSize: 26,
+        fontSize: 24,
         textAlign: "center",
         textShadowColor: "#000",
         textShadowRadius: 20
