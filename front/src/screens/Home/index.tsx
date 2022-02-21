@@ -7,7 +7,7 @@ import { useFonts } from 'expo-font';
 /** */
 import { styles } from './styles';
 
-export default function Home() {
+export default function Home({navigation}:any) {
 
     const [loaded] = useFonts({
         Light: require('../../../assets/fonts/RobotoMono-Light.ttf'),
@@ -37,7 +37,7 @@ export default function Home() {
                 <TouchableOpacity
                     style={styles.buttonView}
                     activeOpacity={.8}
-                    onPress={() => { }}
+                    onPress={() => { navigation.navigate("GetName") }}
                 >
                     <Text style={[styles.buttonText, {fontFamily: "Bold"}]}>Escrever</Text>
                     <Feather name='edit' size={24} color={"#000"} />
