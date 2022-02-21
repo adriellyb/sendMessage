@@ -18,6 +18,16 @@ export default function GetName({ navigation }:any) {
         Bold: require('../../../assets/fonts/RobotoMono-Bold.ttf'),
     });
 
+    const goToGetEmail = () => {
+        {
+            navigation.navigate({
+                name: "GetEmail",
+                params: { name: text },
+                merge: true,
+            })
+        }
+    }
+
     if (!loaded) {
         return null;
     }
@@ -49,7 +59,7 @@ export default function GetName({ navigation }:any) {
                     <TouchableOpacity 
                         style={styles.buttonView} 
                         activeOpacity={.8}
-                        onPress={() => { navigation.navigate("GetEmail", {name: text})}}
+                        onPress={() => { goToGetEmail() }}
                     >
                         <Text style={[styles.buttonText, { fontFamily: "Bold" }]}>Seguir</Text>
                         <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
