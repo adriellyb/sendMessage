@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { ImageBackground, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { useForm, Controller } from "react-hook-form";
 import { Shadow } from 'react-native-shadow-2';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
 
 /** */
 import { styles } from './styles';
+interface FormData {
+    email: string;
+}
 
 export default function GetEmail({ navigation, route }: any) {
 
-    const [text, setText] = useState("");
+    const { control, handleSubmit } = useForm<FormData>({
+        defaultValues: {
+            email: '',
+        }
+    })
     const [author, setAuthor] = useState("");
 
     const [loaded] = useFonts({
@@ -27,14 +35,14 @@ export default function GetEmail({ navigation, route }: any) {
     }, [route.params?.name]);
 
 
-    const goToWriteMessage = () => {
+    const goToWriteMessage = (data: FormData) => {
         {
             navigation.navigate({
                 name: "WriteMessage",
                 params: {
                     data: {
                         author: author,
-                        email: text
+                        email: data.email
                     }
                 },
                 merge: true,
@@ -53,7 +61,7 @@ export default function GetEmail({ navigation, route }: any) {
         >
             <Shadow offset={[-6, 6]} startColor={'#000'} finalColor={"#000"} distance={3}>
                 <View style={styles.stepView}>
-                    <Text style={[styles.stepText, { fontFamily: "Bold" }]}>1</Text>
+                    <Text style={[styles.stepText, { fontFamily: "Bold" }]}>2</Text>
                 </View>
             </Shadow>
 
@@ -61,11 +69,21 @@ export default function GetEmail({ navigation, route }: any) {
                 <Shadow offset={[-6, 6]} startColor={'#000'} finalColor={"#000"} distance={3}>
                     <View style={styles.boxContent}>
                         <Text style={[styles.labelTitle, { fontFamily: "Bold" }]}>Pra quem você quer mandar?</Text>
-                        <TextInput
-                            value={text}
-                            placeholder="exemplo@gmail.com"
-                            onChangeText={(text: any) => setText(text)}
-                            style={styles.input}
+                        <Controller
+                            control={control}
+                            rules={{
+                                required: true,
+                            }}
+                            render={({ field: { onChange, onBlur, value } }) => (
+                                <TextInput
+                                    onBlur={onBlur}
+                                    onChangeText={onChange}
+                                    value={value}
+                                    placeholder="exemplo@email.com"
+                                    style={styles.input}
+                                />
+                            )}
+                            name="email"
                         />
                     </View>
                 </Shadow>
@@ -74,7 +92,7 @@ export default function GetEmail({ navigation, route }: any) {
                     <TouchableOpacity
                         style={styles.buttonView}
                         activeOpacity={.8}
-                        onPress={() => { goToWriteMessage() }}
+                        onPress={ handleSubmit(goToWriteMessage)}
                     >
                         <Text style={[styles.buttonText, { fontFamily: "Bold" }]}>Seguir</Text>
                         <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
