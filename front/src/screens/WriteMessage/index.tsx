@@ -117,12 +117,3 @@ export default function WriteMessage({ navigation, route }: any) {
         </ImageBackground>
     )
 }
-
-/**
- * ### Atualizações
- * - Adicionando dependências - axios
- * - Criando uma service para integração
- * - Integrando a função sendMessage com o back-end
- * - Adicionando o icon do app no fim da tela
- * - Alterando a lógica do contador de caracteres
- */
