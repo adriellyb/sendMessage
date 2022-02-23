@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, ImageBackground, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useForm, Controller } from "react-hook-form";
 import { Shadow } from 'react-native-shadow-2';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -34,7 +34,7 @@ export default function GetName({ navigation }: any) {
                 merge: true,
             })
         }
-    }    
+    }
 
     if (!loaded) {
         return null;
@@ -42,7 +42,7 @@ export default function GetName({ navigation }: any) {
 
     return (
         <ImageBackground
-            source={require("../../../assets/background2.png")}
+            source={require("../../../assets/background.png")}
             style={styles.imageView}
         >
             <Shadow offset={[-6, 6]} startColor={'#000'} finalColor={"#000"} distance={3}>
@@ -85,6 +85,11 @@ export default function GetName({ navigation }: any) {
                     </TouchableOpacity>
                 </Shadow>
             </View>
+
+            <Image
+                source={require('../../../assets/homeicon.png')}
+                style={{ width: 50, height: 50, alignSelf: "center" }}
+            />
 
         </ImageBackground>
     )
