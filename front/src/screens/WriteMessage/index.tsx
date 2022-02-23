@@ -21,15 +21,12 @@ export default function WriteMessage({ navigation, route }: any) {
         }
     })
     const [info, setInfo] = useState<any>([]);
-    /** pegar informações atuais do campo senha*/
+
+    /** pegar informações atuais do campo message */
     const text = useRef("");
     text.current = watch("message", "") 
 
     const [loaded] = useFonts({
-        Light: require('../../../assets/fonts/RobotoMono-Light.ttf'),
-        Regular: require('../../../assets/fonts/RobotoMono-Regular.ttf'),
-        Medium: require('../../../assets/fonts/RobotoMono-Medium.ttf'),
-        SemiBold: require('../../../assets/fonts/RobotoMono-SemiBold.ttf'),
         Bold: require('../../../assets/fonts/RobotoMono-Bold.ttf'),
     });
 
@@ -43,9 +40,11 @@ export default function WriteMessage({ navigation, route }: any) {
         api.post('/email', data)
         .then((res:any) => {
             console.log(res.data);
+            navigation.navigate("SuccessScreen");
         })
         .catch((err:any) => {
             console.log(err.response);
+            navigation.navigate("FailedScreen");
         })
     }
 
