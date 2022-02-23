@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ImageBackground, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, ImageBackground, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useForm, Controller } from "react-hook-form";
 import { Shadow } from 'react-native-shadow-2';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
+import api from '../../services/api';
 
 /** */
 import { styles } from './styles';
@@ -14,12 +15,15 @@ interface FormData {
 
 export default function WriteMessage({ navigation, route }: any) {
 
-    const { control, handleSubmit } = useForm<FormData>({
+    const { control, handleSubmit, watch } = useForm<FormData>({
         defaultValues: {
             message: '',
         }
     })
-    const [info, setInfo] = useState<any>([]);    
+    const [info, setInfo] = useState<any>([]);
+    /** pegar informações atuais do campo senha*/
+    const text = useRef("");
+    text.current = watch("message", "") 
 
     const [loaded] = useFonts({
         Light: require('../../../assets/fonts/RobotoMono-Light.ttf'),
@@ -35,24 +39,32 @@ export default function WriteMessage({ navigation, route }: any) {
         }
     }, [route.params?.data]);
 
+    const sendMessage = (data: any) => {
+        api.post('/email', data)
+        .then((res:any) => {
+            console.log(res.data);
+        })
+        .catch((err:any) => {
+            console.log(err.response);
+        })
+    }
+
     const onSubmit = (data:FormData) => {
         var sendData = {
             author: info.author,
             to: info.email,
-            message: data.message
+            text: data.message
         }
-
-        console.log(sendData);
-        
+        sendMessage(sendData);
     }
 
     if (!loaded) {
         return null;
     }
-
+    
     return (
         <ImageBackground
-            source={require("../../../assets/background2.png")}
+            source={require("../../../assets/background.png")}
             style={styles.imageView}
         >
             <Shadow offset={[-6, 6]} startColor={'#000'} finalColor={"#000"} distance={3}>
@@ -82,7 +94,7 @@ export default function WriteMessage({ navigation, route }: any) {
                         )}
                             name="message"
                         />
-                        {/* <Text style={{alignSelf: "flex-end", paddingRight: "5%"}}>{text.length}/240</Text> */}
+                        <Text style={{alignSelf: "flex-end", paddingRight: "5%"}}>{text.current.length}/240</Text>
                     </View>
                 </Shadow>
 
@@ -97,6 +109,20 @@ export default function WriteMessage({ navigation, route }: any) {
                     </TouchableOpacity>
                 </Shadow>
             </View>
+
+            <Image
+                source={require('../../../assets/homeicon.png')}
+                style={{ width: 50, height: 50, alignSelf: "center" }}
+            />
         </ImageBackground>
     )
 }
+
+/**
+ * ### Atualizações
+ * - Adicionando dependências - axios
+ * - Criando uma service para integração
+ * - Integrando a função sendMessage com o back-end
+ * - Adicionando o icon do app no fim da tela
+ * - Alterando a lógica do contador de caracteres
+ */
