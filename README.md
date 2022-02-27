@@ -1,3 +1,4 @@
+<img
 # sendMessage
 
 ## Índice
@@ -94,5 +95,5 @@ npm run migrate
 - Para finalizar, sirva o projeto através do comando:
 
 ```jsx
-npm run dev
+npm start
 ```
