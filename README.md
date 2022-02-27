@@ -1,4 +1,7 @@
-<img
+<p align="center">
+  <img src="https://github.com/adriellyb/sendMessage/blob/main/front/assets/homeicon.png" />
+</p>
+
 # sendMessage
 
 ## Índice
