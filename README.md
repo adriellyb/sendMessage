@@ -22,7 +22,7 @@ A ideia desta aplicação é um sistema simples de envio de email onde o usuári
 
 ### Desenvolvedora
 
-- Adrielly Balbino
+- [Adrielly Balbino](https://www.linkedin.com/in/adrielly-balbino/)
 
 ### Frameworks Utilizadas
 - [Node JS](https://nodejs.org/en/)
